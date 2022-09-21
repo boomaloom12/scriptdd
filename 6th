@@ -1,0 +1,94 @@
+while true do 
+
+
+local player = game:GetService("Players").LocalPlayer
+local mouse = player:GetMouse()
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Y then
+        if mouse.Target.Parent.Name == "Workspace" or mouse.Target.Parent.Name ~= "Model" then return end
+        for i,v in pairs(mouse.Target.Parent:GetDescendants()) do
+            if v.Name == "Hitbox" then
+                if v.Parent:FindFirstChild("WEAKSIDE") then
+
+                    v.Size = v.Parent.WEAKSIDE.Size
+                    v.CFrame = v.Parent.WEAKSIDE.CFrame
+                    v.Position = v.Position + v.Parent.WEAKSIDE.CFrame.LookVector * -0.15
+                    v.Transparency = 0.75
+
+                end
+            end
+        end
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Y then
+        if mouse.Target.Parent.Name == "Workspace" or mouse.Target.Parent.Name ~= "Model" then return end
+        for i,v in pairs(mouse.Target.Parent:GetDescendants()) do
+            if v.Name == "Hitbox" then
+                if v.Parent:FindFirstChild("Union") then
+
+                    v.Size = v.Parent.Union.Size - Vector3.new(0.25,0.25,0.25)
+                    v.CFrame = v.Parent.Wall.CFrame
+                    v.Position = v.Position + v.Parent.Wall.CFrame.LookVector * -0.4
+                    v.Transparency = 0.75
+
+                end
+            end
+        end
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.T then
+        if mouse.Target.Parent.Name == "Workspace" or mouse.Target.Parent.Name ~= "Model" then return end
+        for i,v in pairs(mouse.Target.Parent:GetDescendants()) do
+            if v.Parent:FindFirstChild("Hitbox") then
+                if v.Parent:FindFirstChild("Union") or v.Parent:FindFirstChild("WEAKSIDE") then
+                v.Transparency = 0.85
+                end
+            end
+        end
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.U then
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+            if v.Name == "Hitbox" then
+                if v.Parent:FindFirstChild("WEAKSIDE") or v.Parent:FindFirstChild("Union") then
+                    local chams_box = Instance.new("BoxHandleAdornment", v)
+                    chams_box.Name = "Chams"
+                    chams_box.AlwaysOnTop = true
+                    chams_box.ZIndex = -1
+                    chams_box.Adornee = v
+                    chams_box.Color3 = Color3.fromRGB(25, 25, 250)
+                    chams_box.Transparency = 0.85
+                    chams_box.Size = v.Size / 1.05
+
+                    local chams_box = Instance.new("BoxHandleAdornment", v)
+                    chams_box.Name = "Chams"
+                    chams_box.AlwaysOnTop = true
+                    chams_box.ZIndex = 3
+                    chams_box.Adornee = v
+                    chams_box.Color3 = Color3.fromRGB(0, 20, 200)
+                    chams_box.Transparency = 0.925
+                    chams_box.Size = v.Size
+                end
+            end
+        end
+    end
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.K then
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+            if v.Name == "Chams" then
+                v:Destroy()
+            end
+        end
+    end
+end)
